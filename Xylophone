@@ -1,3 +1,15 @@
+STEPS FOR EXECUTING
+1.WRITE CODE
+2.CREATE AUDIO FOLDER AND PUT SONGS
+3.TERMINAL-> flutter pug dev add assets_audio_player
+4.assets:
+    - audios/
+5.go to app->builtgrade
+   go to jason archotecture called 'default config' and add code 'multiDexEnabled true'
+
+
+
+
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 
@@ -42,3 +54,47 @@ class XyloApp extends StatelessWidget{
     );
   }
 }
+
+
+--------------------------------------------------------------------------------------
+
+or this program also we can add incase above program  did not work
+
+import 'package:flutter/material.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
+void main() {
+ runApp(MaterialApp(
+ home: Scaffold(
+ appBar: AppBar(title: Text('XYLOPHONE'), centerTitle: true),
+ body: XyloPage(),
+ ),
+ ));
+}
+class XyloPage extends StatelessWidget {
+ void playSound(int noteNumber) => AssetsAudioPlayer.newPlayer().open(
+ Audio('audios/note$noteNumber.wav'),
+ autoStart: true,
+ showNotification: true,
+ );
+ Widget buildButton(Color color, int noteNumber, String label) => Expanded(
+ child: TextButton(
+ style: TextButton.styleFrom(backgroundColor: color),
+ onPressed: () => playSound(noteNumber),
+ child: Text(label),
+ ),
+ );
+ @override
+ Widget build(BuildContext context) => Column(
+ crossAxisAlignment: CrossAxisAlignment.stretch,
+ children: [
+ buildButton(Colors.amberAccent, 1, 'first'),
+ buildButton(Colors.brown, 2, 'second'),
+ buildButton(Colors.yellow, 3, 'third'),
+ buildButton(Colors.green, 4, 'four'),
+ ],
+ );
+}
+In app/gradle
+DefautConfig{
+
+
