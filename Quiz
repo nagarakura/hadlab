@@ -1,0 +1,78 @@
+import 'package:flutter/material.dart';
+
+void main(){
+  runApp(MaterialApp(
+    home:Scaffold(
+      appBar: AppBar(
+        title:Text("Quiz Appp")
+      ),
+      body:QuizApp(),
+    )
+  ));
+}
+
+class Question{
+  final String text;
+  final  bool ans;
+
+  Question({required this.text,required this.ans});
+}
+
+class QuizApp extends StatefulWidget {
+  @override
+  State<QuizApp> createState() => _QuizAppState();
+}
+
+List<Question>questions=[
+  Question(text: "Is the Earth flat?", ans: false),
+  Question(text: "Was the first computer called ENIAC?", ans: true),
+  Question(text: "Do humans have gills?", ans: false),
+  Question(text: "Is Pluto a planet?", ans: false),
+
+  Question(text: "Was the Eiffel Tower built in the 19th century?", ans: true),
+];
+
+int curr=0;
+
+int score=0;
+
+
+
+class _QuizAppState extends State<QuizApp>{
+
+  void checkans(bool answer){
+    setState(() {
+      if(curr<questions.length){
+        if(questions[curr].ans == answer){
+          score++;
+        }
+      }
+    });
+    curr++;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          Text(curr<questions.length ? questions[curr].text : "Quiz Completed"),
+
+          //true
+
+            SizedBox(height: 20),
+            ElevatedButton(onPressed: () => checkans(true),
+                child: curr >= questions.length ? Text("Thank You") : Text(
+                    "True")),
+
+            SizedBox(height: 20),
+            ElevatedButton(
+                onPressed: () => checkans(false),child:curr >= questions.length ? Text("Visit Again") : Text("False")),
+
+            Text("Your Score is $score")
+
+        ],
+      ),
+    );
+  }
+}
