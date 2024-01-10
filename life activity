@@ -151,3 +151,7 @@ public class MainActivity extends AppCompatActivity {
         wbs.loadUrl("https://github.com/nagarakura/ml");
     }
 }
+
+
+add this in androidmanifest file before execution in 4th line
+ <uses-permission android:name="android.permission.INTERNET"/>
